@@ -8,7 +8,9 @@ use PhpParser\Node\Expr\FuncCall;
 class PqrsController extends Controller
 {
     //recibe datos del html  y muestra datos en la pagina, laravel recibe la peticion http  
-     public function store (Request $request){
+     
+    
+    public function store (Request $request){
        $request ->validate([
 
             'nombres'=> 'required|string|max:100',
@@ -30,10 +32,39 @@ class PqrsController extends Controller
        return redirect()->route('nosotros')->with('success', 'Mensaje guardado correctamente ✅');
      }
      public function index(){
- 
+
      $pqrs = Pqrs::latest()->get();
   
     return view('mensajes', compact('pqrs'));
-}
+      } 
+    public function edit($id)
+    {
+        $mensaje = Pqrs::findOrFail($id);
+        return view('editar_mensaje', compact('mensaje'));
+    }
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nombres'=> 'required|string|max:100',
+                'apellidos'=> 'required|string|max:100',
+                'correo' => 'required|email',
+                'tipo' => 'required|in:Queja,Peticion,Felicitacion',
+                'acepto'=> 'accepted'
+        ]);
+
+        $mensaje = Pqrs::findOrFail($id);
+
+        $mensaje->update([
+             'nombre'=> $request ->nombres, 
+                'apellidos'=> $request ->apellidos,
+                      'correo'=> $request ->correo,
+                      'tipo'=> $request ->tipo,
+                      'mensaje'=> $request ->mensaje,
+                      'estado'=> $request ->has ('acepto')
+
+        ]);
+    }
+
+
 
 }

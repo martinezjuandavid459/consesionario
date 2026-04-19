@@ -17,6 +17,7 @@
                     <th>Tipo</th>
                     <th>Mensaje</th>
                     <th>Fecha</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,6 +27,8 @@
                         <td>{{ $item->nombre }}</td>
                         <td>{{ $item->apellido }}</td>
                         <td>{{ $item->correo }}</td>
+
+                        {{-- TIPO --}}
                         <td>
                             <span class="badge 
                                 @if($item->tipo == 'Queja') bg-danger
@@ -35,8 +38,28 @@
                                 {{ $item->tipo }}
                             </span>
                         </td>
+
+                        {{-- MENSAJE --}}
                         <td class="text-start">{{ $item->mensaje }}</td>
+
+                        {{-- FECHA --}}
                         <td>{{ $item->created_at->format('d/m/Y H:i') }}</td>
+
+                        {{-- ACCIONES --}}
+                        <td>
+                            <a href="" class="btn btn-warning btn-sm mb-1">
+                                Editar
+                            </a>
+
+                            <form action="" method="POST" style="display:inline-block;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm"
+                                    onclick="return confirm('¿Seguro que deseas eliminar este mensaje?')">
+                                    Eliminar
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                 @empty
                     <tr>
