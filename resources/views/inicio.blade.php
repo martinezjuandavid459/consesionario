@@ -77,10 +77,9 @@ h1{
     seguridad y el mejor servicio para nuestros clientes.
  </p>
 
- <button class="btn-auto">
+ <a href="{{ route('menu') }}" class="btn-auto">
     Conocer más
- </button>
+</a>
 
 </div>
-
 @endsection
