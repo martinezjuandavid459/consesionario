@@ -47,7 +47,7 @@
 
                         {{-- ACCIONES --}}
                         <td>
-                            <a href="" class="btn btn-warning btn-sm mb-1">
+                            <a href="{{ route('mensajes.edit', $item->id) }}" class="btn btn-warning btn-sm mb-1">
                                 Editar
                             </a>
 

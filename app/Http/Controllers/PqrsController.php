@@ -40,7 +40,7 @@ class PqrsController extends Controller
     public function edit($id)
     {
         $mensaje = Pqrs::findOrFail($id);
-        return view('editar_mensaje', compact('mensaje'));
+        return view('editar_mensajes', compact('mensaje'));
     }
     public function update(Request $request, $id)
     {
